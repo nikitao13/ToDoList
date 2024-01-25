@@ -39,6 +39,7 @@ const TaskItem = ({ task, onDelete, handleEditTask }) => {
                                 placeholder={task.title}
                                 className="w-44 pl-2 outline-0"
                                 size={task.title.length}
+                                maxLength={55}
                                 required
                             />
                             <img
