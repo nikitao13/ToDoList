@@ -1,7 +1,7 @@
 import TaskItem from "./TaskItem.jsx";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 
-const TaskList = ({ tasks, fetchTasks }) => {
+const TaskList = ({ tasks, fetchTasks, setTasks }) => {
     const endOfTasksRef = useRef(null);
 
     const handleDeleteTask = async (taskId) => {
@@ -18,6 +18,25 @@ const TaskList = ({ tasks, fetchTasks }) => {
         }
     };
 
+    const handleEditTask = async (taskId, newTitle) => {
+        try {
+            const response = await fetch(`http://localhost:3000/update-task/${taskId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({taskName: newTitle})
+            });
+            if (response.ok) {
+                setTasks(tasks.map(task =>
+                    task.id === taskId ? { ...task, title: newTitle } : task
+                ));
+            } else {
+                console.error('failed to update task');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
         if (endOfTasksRef.current) {
             endOfTasksRef.current.scrollIntoView({ behavior: "smooth" });
@@ -31,6 +50,7 @@ const TaskList = ({ tasks, fetchTasks }) => {
                     key={task.id}
                     task={task}
                     onDelete={() => handleDeleteTask(task.id)}
+                    handleEditTask={handleEditTask}
                 />
             ))}
             <div ref={endOfTasksRef} />

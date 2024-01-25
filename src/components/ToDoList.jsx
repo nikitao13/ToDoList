@@ -17,8 +17,8 @@ const ToDoList = () => {
 
     return (
         <div className="todo-list h-full w-full mx-auto justify-between flex flex-col items-stretch">
-            <TaskList tasks={tasks} fetchTasks={fetchTasks} />
-            <TaskForm onTaskCreate={fetchTasks}/>
+            <TaskList tasks={tasks} fetchTasks={fetchTasks} setTasks={setTasks} />
+            <TaskForm onTaskCreate={fetchTasks} />
         </div>
     )
 }

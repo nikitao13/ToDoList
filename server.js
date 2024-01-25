@@ -1,6 +1,6 @@
 import express from 'express';
 import session from 'express-session';
-import {newTask, sessionUserId, getTasks, deleteTask} from './db/initPrisma.js';
+import {newTask, sessionUserId, getTasks, deleteTask, updateTask} from './db/initPrisma.js';
 import cors from 'cors';
 import 'dotenv/config';
 
@@ -49,6 +49,21 @@ app.delete('/delete-task/:taskId', async (req, res) => {
         console.error(error);
         res.status(500).send('something went wrong');
     }
+});
+
+
+app.post('/update-task/:taskId', async (req, res) => {
+    const { taskId } = req.params;
+    const { taskName } = req.body;
+
+    try {
+        await updateTask(taskId, taskName);
+        res.status(200).send('task updated successfully');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('something went wrong');
+    }
+
 });
 
 

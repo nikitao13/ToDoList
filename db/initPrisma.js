@@ -41,3 +41,15 @@ export async function deleteTask(taskId) {
         throw error;
     }
 }
+
+export async function updateTask(taskId, taskTitle) {
+    try {
+        await prisma.task.update({
+            where: { id: taskId },
+            data: { title: taskTitle },
+        });
+    } catch (error) {
+        console.error("Error updating task:", error);
+        throw error;
+    }
+}
