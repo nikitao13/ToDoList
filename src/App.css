@@ -1,0 +1,33 @@
+@media only screen and (max-width: 767px) {
+    .task-list {
+        width: 100%;
+        margin-top: 1rem !important;
+    }
+    main {
+        padding: 0 !important;
+    }
+    .taskItems {
+        width: 90% !important;
+    }
+    .taskItems h1 {
+        font-size: 16px !important;
+    }
+    .modal-open  {
+        justify-content: flex-end !important;
+    }
+    form {
+        width: 85% !important;
+    }
+    .modal-open h1 {
+        display: none;
+    }
+    .modal-open .modal-input {
+        width: 100%;
+        font-size: 16px !important;
+        padding-bottom: 3px;
+    }
+    .modal-content {
+        justify-content: flex-end !important;
+    }
+
+}

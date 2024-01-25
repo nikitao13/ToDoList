@@ -17,8 +17,8 @@ const Modal = ({ children, onClose }) => {
     }, [onClose]);
 
     return (
-        <div className="modal-overlay">
-            <div className="modal-content" ref={modalRef}>
+        <div className="modal-overlay h-auto">
+            <div className="modal-content flex" ref={modalRef}>
                 {children}
             </div>
         </div>

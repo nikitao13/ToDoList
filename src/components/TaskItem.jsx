@@ -9,6 +9,7 @@ const TaskItem = ({ task, onDelete, handleEditTask }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentTask, setCurrentTask] = useState(null);
 
+
     const openModal = (task) => {
         setCurrentTask(task);
         setIsModalOpen(true);
@@ -20,13 +21,17 @@ const TaskItem = ({ task, onDelete, handleEditTask }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (newTitle.trim() === "") {
+            alert("input cannot be empty");
+            return;
+        }
         handleEditTask(currentTask.id, newTitle);
         closeModal();
     };
 
     return (
-        <div className="taskItems mx-auto h-auto w-3/4 flex border-b border-gray-500 justify-between items-center flex-shrink-0">
-            <h1 className="text-xl break-words">{task.title}</h1>
+        <div className={`taskItems mx-auto h-auto w-3/4 flex border-b border-gray-500 justify-between items-center flex-shrink-0 ${isModalOpen ? 'modal-open' : ''}`}>
+            <h1 className={`task-name text-xl break-words ${isModalOpen ? 'modal-open' : ''}`}>{task.title}</h1>
             <div className="btnContainer flex gap-3 h-full justify-center">
 
                 {isModalOpen && (
@@ -37,17 +42,18 @@ const TaskItem = ({ task, onDelete, handleEditTask }) => {
                                 value={newTitle}
                                 onChange={(e) => setNewTitle(e.target.value)}
                                 placeholder={task.title}
-                                className="w-44 pl-2 outline-0"
-                                size={task.title.length}
-                                maxLength={55}
+                                className="modal-input w-max outline-0"
+                                maxLength={30}
                                 required
                             />
-                            <img
-                                src={saveBtn}
-                                alt="save"
-                                onClick={handleSubmit}
-                                className="cursor-pointer h-6"
-                            />
+                            <div className="saveBtnDiv w-max">
+                                <img
+                                    src={saveBtn}
+                                    alt="save"
+                                    onClick={handleSubmit}
+                                    className={`cursor-pointer h-6 ${isModalOpen ? 'modal-open' : ''}`}
+                                />
+                            </div>
                         </form>
                     </Modal>
                 )}
@@ -56,13 +62,13 @@ const TaskItem = ({ task, onDelete, handleEditTask }) => {
                     src={editBtn}
                     alt="edit"
                     onClick={() => openModal(task)}
-                    className="ml-auto cursor-pointer h-6"
+                    className={`ml-auto cursor-pointer h-6 ${isModalOpen ? 'modal-open' : ''}`}
                 />
                 <img
                     src={deleteBtn}
                     alt="delete"
                     onClick={() => onDelete(task.id)}
-                    className="ml-auto cursor-pointer h-6"
+                    className={`ml-auto cursor-pointer h-6 ${isModalOpen ? 'modal-open' : ''}`}
                 />
             </div>
         </div>

@@ -1,7 +1,7 @@
 import TaskItem from "./TaskItem.jsx";
 import {useEffect, useRef, useState} from "react";
 
-const TaskList = ({ tasks, fetchTasks, setTasks }) => {
+const TaskList = ({ tasks, fetchTasks, setTasks, inputLength }) => {
     const endOfTasksRef = useRef(null);
 
     const handleDeleteTask = async (taskId) => {
@@ -51,6 +51,7 @@ const TaskList = ({ tasks, fetchTasks, setTasks }) => {
                     task={task}
                     onDelete={() => handleDeleteTask(task.id)}
                     handleEditTask={handleEditTask}
+                    inputLength={inputLength}
                 />
             ))}
             <div ref={endOfTasksRef} />

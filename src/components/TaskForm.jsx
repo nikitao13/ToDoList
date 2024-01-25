@@ -34,7 +34,7 @@ const TaskForm = ({ onTaskCreate }) => {
                     placeholder="enter a task..."
                     onChange={(e) => setTaskName(e.target.value)}
                     className="border-2 border-gray-400 rounded-md p-1 mb-2 text-lg w-full"
-                    maxLength={55}
+                    maxLength={30}
                     required
                 />
                 <button className="border-2 border-gray-400 rounded-md p-1 mb-2 w-20 text-lg">add</button>
